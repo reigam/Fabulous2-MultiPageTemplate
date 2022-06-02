@@ -8,17 +8,15 @@ module AppPages =
     let nameValue (Name str) = str
     type Names = {
         TemplatePage: Name
-        StartPage: Name
-        TrainingPage: Name    
         FirstPage: Name
         SecondPage: Name
+        ThirdPage: Name
     }
     let names: Names = {
         TemplatePage = Name "Template Page"
-        StartPage = Name "Start Page"
-        TrainingPage = Name "Training Page"
         FirstPage = Name "First Page"
         SecondPage = Name "Second Page"
+        ThirdPage = Name "Third Page"
     }
         
 type GlobalModel = { 

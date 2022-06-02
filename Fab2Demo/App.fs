@@ -10,43 +10,57 @@ open type View
 module App =
     type Model = {
         Global: GlobalModel
-        StartPage: StartPage.Model
+        FirstPage: FirstPage.Model
+        SecondPage: SecondPage.Model
+        ThirdPage: ThirdPage.Model
     }
 
     type Msg =
-        | StartPageMsg of StartPage.Msg
+        | FirstPageMsg of FirstPage.Msg
+        | SecondPageMsg of SecondPage.Msg
+        | ThirdPageMsg of ThirdPage.Msg
         | NavigationPopped
 
     let initModel = 
         { Global = { 
-            PageStash = [AppPages.names.StartPage] }
-          StartPage = StartPage.init()
+            PageStash = [AppPages.names.FirstPage] }
+          FirstPage = FirstPage.init()
+          SecondPage = SecondPage.init()
+          ThirdPage = ThirdPage.init()
         }
           
     let init () = initModel
 
     let update msg model =
         match msg with
-        | StartPageMsg m ->
-            let l, g = StartPage.update m model.StartPage model.Global
-            { model with StartPage = l; Global = g }
+        | FirstPageMsg m ->
+            let l, g = FirstPage.update m model.FirstPage model.Global
+            { model with FirstPage = l; Global = g }       
+        | SecondPageMsg m ->
+            let l, g = SecondPage.update m model.SecondPage model.Global
+            { model with SecondPage = l; Global = g }       
+        | ThirdPageMsg m ->
+            let l, g = ThirdPage.update m model.ThirdPage model.Global
+            { model with ThirdPage = l; Global = g }   
         | NavigationPopped ->
             { model with Global = { PageStash = Helpers.reshuffle model.Global.PageStash } }
 
     let view (model: Model) =
-        let p = View.map StartPageMsg (StartPage.view model.StartPage model.Global)
-        let q =
-            ContentPage(
-                "Fabulous2.0 Demo",
-                VStack() {
-                    Label("Test")
-                        .centerTextHorizontal()
-                }
-            )
+//        let p = View.map FirstPageMsg (FirstPage.view model.FirstPage model.Global)
         Application(
-            (NavigationPage(){
-                q
-                p
+            (NavigationPage(){                
+                for page in model.Global.PageStash do
+                    match page with
+                    |AppPages.Name "First Page" ->
+                        let p = View.map FirstPageMsg (FirstPage.view model.FirstPage model.Global)
+                        yield p 
+                    |AppPages.Name "Second Page" ->
+                        let p = View.map SecondPageMsg (SecondPage.view model.SecondPage model.Global)
+                        yield p 
+                    |AppPages.Name "Third Page" ->
+                        let p = View.map ThirdPageMsg (ThirdPage.view model.ThirdPage model.Global)
+                        yield p 
+                    | _ -> ()
             })
                 .onPopped(NavigationPopped)
         )
