@@ -31,6 +31,9 @@ module SecondPage =
         ContentPage (
             (model.Title |> AppPages.nameValue),
             VStack() {
+                Label("First Label")
                 Button("Go To Third Page", OpenPage AppPages.names.ThirdPage)
+                Button("Close All", Close)
+                Label("Last Label")
             }
         )

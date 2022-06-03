@@ -33,6 +33,7 @@ module FirstPage =
                     .centerTextHorizontal()                
                 Button("Go To Second Page", OpenPage AppPages.names.SecondPage)
                 Label("Last Label")
+                    .centerTextHorizontal()        
             }
         )       
         

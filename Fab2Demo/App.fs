@@ -46,7 +46,6 @@ module App =
             { model with Global = { PageStash = Helpers.reshuffle model.Global.PageStash } }
 
     let view (model: Model) =
-//        let p = View.map FirstPageMsg (FirstPage.view model.FirstPage model.Global)
         Application(
             (NavigationPage(){                
                 for page in model.Global.PageStash do
