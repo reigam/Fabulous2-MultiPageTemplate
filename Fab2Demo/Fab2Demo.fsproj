@@ -16,6 +16,6 @@
       <Compile Include="FirstPage.fs" />
       <Compile Include="SecondPage.fs" />
       <Compile Include="ThirdPage.fs" />
-      <Compile Include="App.fs" />
+      <Compile Include="Fab2Demo.fs" />
     </ItemGroup>
 </Project>

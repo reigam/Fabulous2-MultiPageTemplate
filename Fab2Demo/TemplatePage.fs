@@ -23,7 +23,7 @@ module TemplatePage =
 
     let update msg (model: Model) (globalModel: GlobalModel) =
         match msg with
-        | Close -> model, { globalModel with PageStash = [thisPage] }
+        | Close -> model, { globalModel with PageStash = [thisPage] }, Cmd.none
 
     let view (model: Model) (globalModel: GlobalModel)  =
         ContentPage (
@@ -32,11 +32,3 @@ module TemplatePage =
                 Button("Do Something", Close)
             }
         )
-            
-//            content = View.StackLayout (
-//                verticalOptions = LayoutOptions.Center,
-//                children = [
-//                    View.Button (
-//                        text = "Back to start page",
-//                        command = (fun () -> dispatch (Close)),
-//                        horizontalOptions = LayoutOptions.Center) ]))

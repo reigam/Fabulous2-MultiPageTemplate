@@ -1,6 +1,7 @@
 ﻿namespace Fab2Demo
 
 open Xamarin.Forms
+open Fabulous
 open Fabulous.XamarinForms
 
 open type View
@@ -19,11 +20,11 @@ module FirstPage =
         Title = thisPage
     }
     
-    let init() = initModel
+    let init() = initModel, Cmd.none
     
     let update msg (model: Model) (globalModel: GlobalModel) =
         match msg with
-        | OpenPage s -> model, {globalModel with PageStash = List.append globalModel.PageStash [s]}
+        | OpenPage s -> model, {globalModel with PageStash = List.append globalModel.PageStash [s]}, Cmd.none
             
     let view (model: Model) (globalModel: GlobalModel) =        
         ContentPage(
