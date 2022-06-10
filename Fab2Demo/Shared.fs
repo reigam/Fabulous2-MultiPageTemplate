@@ -8,12 +8,14 @@ module AppPages =
     let nameValue (Name str) = str
     type Names = {
         TemplatePage: Name
+        LayoutsPage: Name
         FirstPage: Name
         SecondPage: Name
         ThirdPage: Name
     }
     let names: Names = {
         TemplatePage = Name "Template Page"
+        LayoutsPage = Name " LayoutsPage"
         FirstPage = Name "First Page"
         SecondPage = Name "Second Page"
         ThirdPage = Name "Third Page"

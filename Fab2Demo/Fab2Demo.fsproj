@@ -8,11 +8,12 @@
         <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
         <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
         <PackageReference Include="FSharp.Core" Version="6.0.1" />
-        <PackageReference Include="Fabulous.XamarinForms" Version="2.0.1" />
+        <PackageReference Include="Fabulous.XamarinForms" Version="2.0.2" />
     </ItemGroup>
     <ItemGroup>
       <Compile Include="Shared.fs" />
       <Compile Include="TemplatePage.fs" />
+      <Compile Include="LayoutsPage.fs" />
       <Compile Include="FirstPage.fs" />
       <Compile Include="SecondPage.fs" />
       <Compile Include="ThirdPage.fs" />

@@ -7,8 +7,8 @@ open Fabulous.XamarinForms
 
 open type View
 
-module TemplatePage =
-    let thisPage = AppPages.names.TemplatePage
+module LayoutsPage =
+    let thisPage = AppPages.names.LayoutsPage
     
     type Model = { 
         Title: AppPages.Name 

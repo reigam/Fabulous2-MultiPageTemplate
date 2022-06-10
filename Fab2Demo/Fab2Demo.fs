@@ -10,12 +10,14 @@ open type View
 module App =
     type Model = {
         Global: GlobalModel
+        LayoutsPage: LayoutsPage.Model
         FirstPage: FirstPage.Model
         SecondPage: SecondPage.Model
         ThirdPage: ThirdPage.Model
     }
 
     type Msg =
+        | LayoutsPageMsg of LayoutsPage.Msg
         | FirstPageMsg of FirstPage.Msg
         | SecondPageMsg of SecondPage.Msg
         | ThirdPageMsg of ThirdPage.Msg
@@ -24,6 +26,7 @@ module App =
     let initModel = 
         { Global = { 
             PageStash = [AppPages.names.FirstPage] }
+          LayoutsPage = fst (LayoutsPage.init())
           FirstPage = fst (FirstPage.init())
           SecondPage = fst (SecondPage.init())
           ThirdPage = fst (ThirdPage.init())
@@ -33,6 +36,9 @@ module App =
 
     let update msg model =
         match msg with
+        | LayoutsPageMsg m ->
+            let l, g, c = LayoutsPage.update m model.LayoutsPage model.Global
+            { model with LayoutsPage = l; Global = g }, (Cmd.map LayoutsPageMsg c)       
         | FirstPageMsg m ->
             let l, g, c = FirstPage.update m model.FirstPage model.Global
             { model with FirstPage = l; Global = g }, (Cmd.map FirstPageMsg c)       
@@ -47,7 +53,8 @@ module App =
 
     let view (model: Model) =
         Application(
-            (NavigationPage(){                
+            (NavigationPage(){
+                //View.map LayoutsPageMsg (LayoutsPage.view model.LayoutsPage model.Global)
                 for page in model.Global.PageStash do
                     match page with                    
                     |AppPages.Name "First Page" ->
@@ -61,7 +68,7 @@ module App =
                         yield p 
                     | _ -> ()
             })
-                .onPopped(NavigationPopped)
+                .onBackNavigated(NavigationPopped)
         )
 
     let program = Program.statefulWithCmd init update view

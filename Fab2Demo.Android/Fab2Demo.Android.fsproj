@@ -4,7 +4,7 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{60C60B90-5708-4910-88CB-0E7AEA1F2178}</ProjectGuid>
+        <ProjectGuid>{4B674755-2850-46D5-A74B-C843CA44C192}</ProjectGuid>
         <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{F2A71F9B-5D33-465A-A702-920D77279786}</ProjectTypeGuids>
         <UseStandardResourceNames>true</UseStandardResourceNames>
         <OutputType>Library</OutputType>
@@ -63,7 +63,7 @@
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\Fab2Demo\Fab2Demo.fsproj">
-            <Project>{A0BF1522-CA62-4DB6-B2FA-2690EBBFE533}</Project>
+            <Project>{7382BCCB-1BD8-4091-8B4C-102ED7D7B59D}</Project>
             <Name>Fab2Demo</Name>
         </ProjectReference>
     </ItemGroup>
@@ -83,7 +83,7 @@
         <PackageReference Include="Xamarin.CommunityToolkit" Version="1.3.2" />
         <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
         <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
-        <PackageReference Include="Fabulous.XamarinForms" Version="2.0.1" />
+        <PackageReference Include="Fabulous.XamarinForms" Version="2.0.2" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.FSharp.targets" />
 </Project>
