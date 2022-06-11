@@ -54,9 +54,11 @@ module App =
     let view (model: Model) =
         Application(
             (NavigationPage(){
-                //View.map LayoutsPageMsg (LayoutsPage.view model.LayoutsPage model.Global)
                 for page in model.Global.PageStash do
-                    match page with                    
+                    match page with                                  
+                    |AppPages.Name "Layouts Page" ->
+                        let p = View.map LayoutsPageMsg (LayoutsPage.view model.LayoutsPage model.Global)
+                        yield p     
                     |AppPages.Name "First Page" ->
                         let p = View.map FirstPageMsg (FirstPage.view model.FirstPage model.Global)
                         yield p 

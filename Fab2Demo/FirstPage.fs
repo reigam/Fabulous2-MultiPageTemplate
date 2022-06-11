@@ -29,12 +29,10 @@ module FirstPage =
     let view (model: Model) (globalModel: GlobalModel) =        
         ContentPage(
             (model.Title |> AppPages.nameValue),
-            VStack() {
-                Label("First Label")
-                    .centerTextHorizontal()                
+            VStack() {             
+                Button("Go To Layouts Page", OpenPage AppPages.names.LayoutsPage)
                 Button("Go To Second Page", OpenPage AppPages.names.SecondPage)
-                Label("Last Label")
-                    .centerTextHorizontal()        
+                Button("Go To Third Page", OpenPage AppPages.names.ThirdPage)
             }
         )       
         

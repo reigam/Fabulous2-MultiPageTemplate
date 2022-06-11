@@ -11,24 +11,39 @@ module LayoutsPage =
     let thisPage = AppPages.names.LayoutsPage
     
     type Model = { 
-        Title: AppPages.Name 
+        Title: AppPages.Name
+        Style: int
     }
       
     type Msg =
         | Close
+        | ChangeStyle
 
-    let initModel = { Title = thisPage }
+    let initModel = {
+        Title = thisPage
+        Style = 0
+    }
 
     let init() = initModel, Cmd.none
 
     let update msg (model: Model) (globalModel: GlobalModel) =
         match msg with
         | Close -> model, { globalModel with PageStash = [thisPage] }, Cmd.none
+        | ChangeStyle ->
+            let i =
+                match model.Style with
+                | 1 -> 2
+                | 2 -> 3
+                | _ -> 1
+            { model with Style = i},
+            globalModel, Cmd.none
 
-    let view (model: Model) (globalModel: GlobalModel)  =
+    let view (model: Model) (globalModel: GlobalModel)  =        
+   
         ContentPage (
             (model.Title |> AppPages.nameValue),
             VStack() {
-                Button("Do Something", Close)
+                Button("ChangeStyle", ChangeStyle).myStyle(model.Style)
+                Label("Something").myStyle(model.Style)
             }
         )
