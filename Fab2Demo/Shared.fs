@@ -36,45 +36,47 @@ module Helpers =
 [<Extension>]
 type MyExtensions =
     [<Extension>]
-    static member inline blueStyle(this: WidgetBuilder<'msg, #IVisualElement>) =
-          this.verticalOptions(LayoutOptions.Center)
-              .horizontalOptions(LayoutOptions.Center)
-              .margin(20.)
-              .backgroundColor(Color.Red.ToFabColor())
-              
-    [<Extension>]
-    static member inline redStyle(this: WidgetBuilder<'msg, #IVisualElement>) =
+    static member inline firstStyle(this: WidgetBuilder<'msg, #IVisualElement>) =
           this.verticalOptions(LayoutOptions.Start)
               .horizontalOptions(LayoutOptions.Start)
-              .margin(40.)
               .backgroundColor(Color.Blue.ToFabColor())
               
     [<Extension>]
-    static member inline myStyle(this: WidgetBuilder<'msg, #IVisualElement>, i)=
-        let x j =
-            match j with
-            | 1 -> this.verticalOptions(LayoutOptions.Start)
+    static member inline secondStyle(this: WidgetBuilder<'msg, #IVisualElement>) =
+              this.margin(80.)
+    
+    [<Extension>]
+    static member inline myStyle(this: WidgetBuilder<'msg, #IVisualElement>, styleID)=
+        match styleID with
+        | 1 -> match box this with
+                | :? WidgetBuilder<'msg, IButton> -> 
+                    this.firstStyle()
+                        .secondStyle()
+                | :? WidgetBuilder<'msg, ILabel> ->
+                    this.verticalOptions(LayoutOptions.Start)
                         .horizontalOptions(LayoutOptions.Start)
                         .margin(40.)
-                        .backgroundColor(Color.Blue.ToFabColor())                
-            | 2 -> this.verticalOptions(LayoutOptions.Start)
+                        .backgroundColor(Color.Green.ToFabColor())                
+                | _ -> this                  
+        | 2 -> match box this with
+                | :? WidgetBuilder<'msg, IButton> ->
+                    this.verticalOptions(LayoutOptions.End)
+                        .horizontalOptions(LayoutOptions.End)
+                        .margin(20.)
+                        .backgroundColor(Color.Green.ToFabColor())    
+                | :? WidgetBuilder<'msg, ILabel> ->
+                    this.verticalOptions(LayoutOptions.Start)
                         .horizontalOptions(LayoutOptions.Start)
                         .margin(40.)
-                        .backgroundColor(Color.Red.ToFabColor())
-            | _ -> this
-               
-        match box this with
-        | :? WidgetBuilder<'msg, IButton> -> x i
-        | :? WidgetBuilder<'msg, ILabel> ->
-            this.verticalOptions(LayoutOptions.Start)
-                .horizontalOptions(LayoutOptions.Start)
-                .margin(40.)
-                .backgroundColor(Color.Green.ToFabColor())                
-        | _ -> this
+                        .backgroundColor(Color.Green.ToFabColor())                
+                | _ ->
+                    printfn "no valid IView found. Fall back to normal style"
+                    this            
+        | _ ->
+            printfn "no valid StyleID selected. Fall back to normal style"
+            this           
+
               
-//        /// TODO Rearange
-//        /// match i
-//        ///     match box this
 
         
 
