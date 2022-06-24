@@ -71,6 +71,8 @@ module App =
                     | _ -> ()
             })
                 .onBackNavigated(NavigationPopped)
+                .hasNavigationBar(true)
+
         )
 
     let program = Program.statefulWithCmd init update view

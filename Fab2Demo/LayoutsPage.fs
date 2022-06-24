@@ -40,10 +40,14 @@ module LayoutsPage =
 
     let view (model: Model) (globalModel: GlobalModel)  =        
    
-        ContentPage (
+        (ContentPage (
             (model.Title |> AppPages.nameValue),
             VStack() {
                 Button("ChangeStyle", ChangeStyle).myStyle(model.Style)
                 Label("Something").myStyle(model.Style)
             }
-        )
+        ))
+            .toolbarItems() {
+                ToolbarItem("test", ChangeStyle)
+            }
+           
