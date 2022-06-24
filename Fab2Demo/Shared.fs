@@ -33,6 +33,12 @@ module Helpers =
         | [] -> []
         | l -> l |> List.rev |> List.tail |> List.rev
         
+    let changeStyle modelStyle =
+        match modelStyle with             
+            | 1 -> 2
+            | 2 -> 3
+            | _ -> 1
+            
 [<Extension>]
 type MyExtensions =
     [<Extension>]
@@ -40,14 +46,19 @@ type MyExtensions =
           this.verticalOptions(LayoutOptions.Start)
               .horizontalOptions(LayoutOptions.Start)
               .backgroundColor(Color.Blue.ToFabColor())
+              .margin(60.)
               
     [<Extension>]
     static member inline secondStyle(this: WidgetBuilder<'msg, #IVisualElement>) =
-              this.margin(80.)
+              this.verticalOptions(LayoutOptions.Center)
+                  .horizontalOptions(LayoutOptions.Center)
+                  .backgroundColor(Color.Red.ToFabColor())
+                  .margin(80.)
     
     [<Extension>]
     static member inline myStyle(this: WidgetBuilder<'msg, #IVisualElement>, styleID)=
         match styleID with
+        //TODO streamline styles first and second 
         | 1 -> match box this with
                 | :? WidgetBuilder<'msg, IButton> -> 
                     this.firstStyle()

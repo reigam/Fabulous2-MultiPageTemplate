@@ -18,6 +18,7 @@ module LayoutsPage =
     type Msg =
         | Close
         | ChangeStyle
+        | SelectedIndexChanged of int 
 
     let initModel = {
         Title = thisPage
@@ -29,22 +30,22 @@ module LayoutsPage =
     let update msg (model: Model) (globalModel: GlobalModel) =
         match msg with
         | Close -> model, { globalModel with PageStash = [thisPage] }, Cmd.none
-        | ChangeStyle ->
-            let i =
-                match model.Style with
-                | 1 -> 2
-                | 2 -> 3
-                | _ -> 1
-            { model with Style = i},
-            globalModel, Cmd.none
+        | ChangeStyle -> { model with Style = Helpers.changeStyle (model.Style) }, globalModel, Cmd.none
+        | SelectedIndexChanged i -> model, globalModel, Cmd.none
+        
 
     let view (model: Model) (globalModel: GlobalModel)  =        
    
         (ContentPage (
             (model.Title |> AppPages.nameValue),
             VStack() {
-                Button("ChangeStyle", ChangeStyle).myStyle(model.Style)
-                Label("Something").myStyle(model.Style)
+                Picker([
+                    "Layout 1"
+                    "Layout 2"
+                ], 0, SelectedIndexChanged)
+                    .myStyle(model.Style)
+                
+                    
             }
         ))
             .toolbarItems() {
